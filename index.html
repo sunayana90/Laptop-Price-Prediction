@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laptop Price Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Laptop Price Predictor</h1>
+    <form action="/predict" method="post">
+        <label>Brand:</label>
+        <select name="company">
+            {% for brand in df['Company'].unique() %}
+                <option value="{{ brand }}">{{ brand }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Type:</label>
+        <select name="type">
+            {% for t in df['TypeName'].unique() %}
+                <option value="{{ t }}">{{ t }}</option>
+            {% endfor %}
+        </select>
+
+        <label>RAM (GB):</label>
+        <select name="ram">
+            {% for r in [2, 4, 6, 8, 12, 16, 24, 32, 64] %}
+                <option value="{{ r }}">{{ r }}</option>
+            {% endfor %}
+        </select>
+
+        <label>Weight:</label>
+        <input type="number" name="weight" step="0.1" required>
+
+        <label>Touchscreen:</label>
+        <select name="touchscreen">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <label>IPS:</label>
+        <select name="ips">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select>
+
+        <label>Screen Size (inches):</label>
+        <input type="number" name="screen_size" step="0.1" min="10" max="18" required>
+
+        <label>Resolution:</label>
+        <select name="resolution">
+            {% for res in ['1920x1080','1366x768','1600x900','3840x2160','3200x1800','2880x1800','2560x1600','2560x1440','2304x1440'] %}
+                <option value="{{ res }}">{{ res }}</option>
+            {% endfor %}
+        </select>
+
+        <label>CPU:</label>
+        <select name="cpu">
+            {% for c in df['Cpu brand'].unique() %}
+                <option value="{{ c }}">{{ c }}</option>
+            {% endfor %}
+        </select>
+
+        <label>HDD (GB):</label>
+        <select name="hdd">
+            {% for h in [0, 128, 256, 512, 1024, 2048] %}
+                <option value="{{ h }}">{{ h }}</option>
+            {% endfor %}
+        </select>
+
+        <label>SSD (GB):</label>
+        <select name="ssd">
+            {% for s in [0, 8, 128, 256, 512, 1024] %}
+                <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+        </select>
+
+        <label>GPU:</label>
+        <select name="gpu">
+            {% for g in df['Gpu brand'].unique() %}
+                <option value="{{ g }}">{{ g }}</option>
+            {% endfor %}
+        </select>
+
+        <label>OS:</label>
+        <select name="os">
+            {% for o in df['os'].unique() %}
+                <option value="{{ o }}">{{ o }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Predict Price</button>
+    </form>
+</body>
+</html>
