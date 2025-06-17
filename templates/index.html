@@ -1,1 +1,186 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop Price Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        select,
+        input[type="text"],
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        .radio-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+        }
+
+        .radio-group label {
+            font-weight: normal;
+        }
+
+        button {
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #4338ca;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #111827;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Laptop Price Predictor</h1>
+
+        <form action="/predict" method="POST">
+
+            <label for="company">Company:</label>
+            <select name="company">
+                {% for c in companies %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="typename">Laptop Type:</label>
+            <select name="typename">
+                {% for t in typenames %}
+                <option value="{{ t }}">{{ t }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="ram">RAM (GB):</label>
+            <select name="ram">
+                {% for r in rams %}
+                <option value="{{ r }}">{{ r }} GB</option>
+                {% endfor %}
+            </select>
+
+            <label for="hdd">HDD (GB):</label>
+            <select name="hdd">
+                {% for h in hdds %}
+                <option value="{{ h }}">{{ h }} GB</option>
+                {% endfor %}
+            </select>
+
+            <label for="ssd">SSD (GB):</label>
+            <select name="ssd">
+                {% for s in ssds %}
+                <option value="{{ s }}">{{ s }} GB</option>
+                {% endfor %}
+            </select>
+
+            <label for="weight">Weight (kg):</label>
+            <input type="text" name="weight" required>
+
+            <label for="screen_size">Screen Size (inches):</label>
+            <input type="text" name="screen_size" required>
+
+            <label for="resolution">Screen Resolution:</label>
+            <select name="resolution">
+                <option value="1366x768">1366x768</option>
+                <option value="1920x1080">1920x1080</option>
+                <option value="1600x900">1600x900</option>
+                <option value="3840x2160">3840x2160</option>
+                <option value="3200x1800">3200x1800</option>
+                <option value="2880x1800">2880x1800</option>
+                <option value="2560x1600">2560x1600</option>
+                <option value="2560x1440">2560x1440</option>
+                <option value="2304x1440">2304x1440</option>
+            </select>
+
+            <label for="cpu">CPU Brand:</label>
+            <select name="cpu">
+                {% for c in cpus %}
+                <option value="{{ c }}">{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="gpu">GPU Brand:</label>
+            <select name="gpu">
+                {% for g in gpus %}
+                <option value="{{ g }}">{{ g }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="os">Operating System:</label>
+            <select name="os">
+                {% for o in oss %}
+                <option value="{{ o }}">{{ o }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Touchscreen:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="touchscreen" value="yes" required> Yes</label>
+                <label><input type="radio" name="touchscreen" value="no"> No</label>
+            </div>
+
+            <label>IPS Display:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="ips" value="yes" required> Yes</label>
+                <label><input type="radio" name="ips" value="no"> No</label>
+            </div>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            {{ prediction_text }}
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>
