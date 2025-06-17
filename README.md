@@ -41,19 +41,6 @@ Users are required to input the following laptop features:
 
 ---
 
-## 📦 Project Structure
-laptop-price-predictor/
-├── app.py # Main Flask app
-├── pipe.pkl # Trained ML pipeline (model)
-├── df.pkl # DataFrame for dropdowns
-├── templates/
-│ └── index.html # HTML UI template
-├── requirements.txt # Python dependencies
-└── README.md
-
-
----
-
 ## 🚀 How to Run Locally
 
 1. **Clone the repository**  
